@@ -57,5 +57,25 @@ class StudentController extends Controller
         $departments = Department::get();
         return view("admin.students.edit", compact('student','departments'));
     }
+     public function update(StudentRequest $request, $id)
+    {
+        $data = $request->validated();
+
+        if ($request->hasFile('photo')) {
+            $photoName = $request->file('photo')->getClientOriginalName();
+            $photo = $request->file('photo')->storeAs('images', $photoName, 'public'); 
+            $data['photo'] = $photo;
+        }
+
+        $student = Student::findOrFail($id);
+
+        if ($request->hasFile('photo') && !empty($student->photo) && Storage::disk('public')->exists($student->photo)) {
+            Storage::disk('public')->delete($student->photo);
+        }
+
+        $student->update($data);
+
+        return redirect()->back()->with('msg','Student updated successfully');
+    }
 }
 ?>

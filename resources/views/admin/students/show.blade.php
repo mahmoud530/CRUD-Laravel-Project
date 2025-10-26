@@ -42,12 +42,14 @@
                         <td>{{ $student->name }}</td>
                         <td>{{ $student->email }}</td>
                         <td>{{ $student->phone }}</td>
+                        <td><img src="{{asset('storage/'.$student->photo)}}" height='105px' alt=""></td>
                         <td>{{ $student->department_id }}</td>
                         <td>{{ $student->created_at }}</td>
                         <td>{{ $student->updated_at }}</td>
 
                     </tr>
                 </tbody>
+                
             </table>
                     <a href="{{ route('admin.student.index') }}" class="btn btn-secondary">Back</a>
 

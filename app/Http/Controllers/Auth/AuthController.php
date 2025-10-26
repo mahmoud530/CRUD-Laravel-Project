@@ -16,6 +16,7 @@ class AuthController extends Controller
     public function register(){
         return view("admin.Auth.register");
     }
+    //handel login
     public function handelLogin(Request $request){
     $data = $request->validate([
     "email" => "required|email",
@@ -38,19 +39,21 @@ if(Auth::user()->role == "admin"){
 }
 
     }
+    //handelreq
     public function handelRegister(Request $request){
         $data=$request->validate([
         "name"=>"required",
         "email"=>"required|email",
         "password"=>"required|min:6"
     ]);
-        $data['password']=Hash::make($request->password);
+    
+    $data['password']=Hash::make($request->password);
     $user=User::create($data); 
     Auth::login($user);
     return redirect()->route("admin.student.index");
     }
+    // lougout
     public function logout(){
-    
     Auth::logout();
     return redirect()->route("login");
     }

@@ -81,6 +81,8 @@
                     <button type="submit" class="btn btn-primary">
                         Add
                     </button>
+                                        <a href="{{ route('admin.student.index') }}" class="btn btn-secondary">Back</a>
+
                 </div>
             </div>
         </form>
